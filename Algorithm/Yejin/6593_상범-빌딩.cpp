@@ -2,6 +2,7 @@
 #include<queue>
 using namespace std;
 
+
 typedef struct Location {
 	int z, y, x;
 };
