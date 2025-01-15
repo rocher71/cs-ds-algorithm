@@ -1,13 +1,11 @@
-﻿#include<iostream>
+#include<iostream>
 #include<queue>
 #include<algorithm>
-#include<vector>
 using namespace std;
 
-int n, maxHeight, minHeight;
+int n, maxHeight, minHeight, maxArea;
 int arr[101][101];
 bool visit[101][101];
-vector<int> areaCnt;
 int dy[4] = { 0, 0, -1, 1 },
 	dx[4] = { -1, 1, 0, 0 };
 
@@ -55,9 +53,8 @@ int main() {
 				area++;
 			}
 		}
-		areaCnt.push_back(area);
+		maxArea = max(maxArea, area);
 	}
 	
-	sort(areaCnt.begin(), areaCnt.end());
-	cout << areaCnt[areaCnt.size() - 1] << "\n";
+	cout << maxArea << "\n";
 }
