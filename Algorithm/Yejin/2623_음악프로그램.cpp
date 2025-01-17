@@ -52,6 +52,7 @@ int main(){
         cout << "0\n";
         return 0;
     }
+    
 
     for(int i : ans) cout << i <<"\n";
     return 0;
