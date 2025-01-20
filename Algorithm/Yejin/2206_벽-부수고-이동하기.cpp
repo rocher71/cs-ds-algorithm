@@ -35,10 +35,10 @@ void bfs() {
 
 			if (nextY < 0 || nextX < 0 || nextY >= row || nextX >= col) continue;
 
-			// ÇöÀç º®, ÀÌ¹Ì ºÎ¼û
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½Ì¹ï¿½ ï¿½Î¼ï¿½
 			if (arr[nextY][nextX] == 1 && currBreakCnt == 1) continue;
 
-			// ÇöÀç º®, ¾ÆÁ÷ ¾È ºÎ¼û
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Î¼ï¿½
 			if(arr[nextY][nextX] == 1 && currBreakCnt == 0 && dist[nextY][nextX][1] > dist[currY][currX][0] + 1){
 				q.push({ nextY, nextX, 1 });
 				dist[nextY][nextX][1] = dist[currY][currX][0] + 1;
@@ -50,7 +50,7 @@ void bfs() {
 
 			if (dist[nextY][nextX][currBreakCnt] <= dist[currY][currX][currBreakCnt]) continue;
 
-			// ÇöÀç º® ¾Æ´Ô
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Æ´ï¿½
 			q.push({ nextY, nextX, currBreakCnt });
 			dist[nextY][nextX][currBreakCnt] = dist[currY][currX][currBreakCnt] + 1;
 			visit[nextY][nextX][currBreakCnt] = true;
