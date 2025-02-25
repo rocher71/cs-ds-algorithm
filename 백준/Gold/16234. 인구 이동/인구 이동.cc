@@ -8,7 +8,6 @@ bool visit[51][51];
 int dy[4] = { 0, 0, -1, 1 }, dx[4] = { -1, 1, 0, 0 };
 
 void bfs(int y, int x) {
-	//fill(&visit[0][0], &visit[n - 1][n], false);
 	queue<pair<int, int>> q, teamQ;
 	q.push({ y, x });
 	teamQ.push({ y, x });
@@ -28,6 +27,7 @@ void bfs(int y, int x) {
 
 			if (nextY < 0 || nextX < 0 || nextY >= n || nextX >= n) continue;
 
+			// 이미 방문한 칸이거나, 차이가 l, r 범위 내에 있지 않을 시 continue
 			int diff = abs(arr[currY][currX] - arr[nextY][nextX]);
 			if (visit[nextY][nextX] || diff < l || diff > r) continue;
 
@@ -35,14 +35,13 @@ void bfs(int y, int x) {
 			q.push({ nextY, nextX });
 			teamQ.push({ nextY, nextX });
 			cntTeam++;
-
-			cntTeam++;
 		}
 	}
-	int population = sum / cnt;
-
+	// 현재 칸에서 연합맺을 인접 국가가 없으면 return
 	if (teamQ.size() == 1) return;
 
+	// 연합 맺은 나라간 인구 재조정
+	int population = sum / cnt;
 	while (!teamQ.empty()) {
 		int currY = teamQ.front().first;
 		int currX = teamQ.front().second;
@@ -68,6 +67,7 @@ int main() {
 	do {
 		cntTeam = 0;
 		fill(&visit[0][0], &visit[n - 1][n], false);
+
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if (visit[i][j]) continue;
