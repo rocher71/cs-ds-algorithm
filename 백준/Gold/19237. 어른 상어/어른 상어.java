@@ -123,15 +123,6 @@ public class Main {
 			sharkMap[shark.r][shark.c].shark = shark.number;
 			sharkMap[shark.r][shark.c].scentLeft = scentLeftTime;
 		}
-
-//		System.out.println(time);
-//		for (int r = 0; r < mapSize; r++) {
-//			for (int c = 0; c < mapSize; c++) {
-//				System.out.print(map[r][c] + " ");
-//			}
-//			System.out.println();
-//		}
-//		System.out.println();
 	}
 
 	static void initialize() throws IOException { // 초기화
