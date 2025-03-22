@@ -1,8 +1,4 @@
-SELECT 
-    id, email, first_name, last_name
-FROM
-    developer_infos
-WHERE
-    skill_1 = 'python' OR skill_2 = 'python'
-        OR skill_3 = 'python'
-ORDER BY id ASC;
+select id, email, first_name, last_name
+from developer_infos
+where skill_1 = 'Python' or skill_2 = 'Python' or skill_3 = 'Python'
+order by id
