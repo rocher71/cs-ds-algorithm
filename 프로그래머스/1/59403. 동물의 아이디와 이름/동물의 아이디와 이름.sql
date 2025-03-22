@@ -1,5 +1,2 @@
-SELECT 
-    animal_id, name
-FROM
-    animal_ins
-ORDER BY animal_id ASC;
+select animal_id, name
+from animal_ins
