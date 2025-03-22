@@ -1,6 +1,3 @@
-SELECT 
-    COUNT(*) AS FISH_COUNT
-FROM
-    fish_info
-WHERE
-    length IS NULL;
+select count(*) as fish_count
+from fish_info
+where length is null
