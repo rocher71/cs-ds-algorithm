@@ -1,10 +1,6 @@
-SELECT DISTINCT
-    first_half.flavor
-FROM
-    first_half,
-    icecream_info
-WHERE
-    first_half.total_order > 3000
-        AND first_half.flavor = icecream_info.flavor
-        AND icecream_info.ingredient_type = 'fruit_based'
-ORDER BY total_order DESC;
+select a.flavor
+from first_half a
+join icecream_info b on a.flavor = b.flavor
+where b.ingredient_type = 'fruit_based'
+group by a.flavor
+having sum(total_order) > 3000
