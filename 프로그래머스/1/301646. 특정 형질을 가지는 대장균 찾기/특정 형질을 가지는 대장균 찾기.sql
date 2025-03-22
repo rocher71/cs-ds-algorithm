@@ -1,8 +1,5 @@
-SELECT 
-    COUNT(*) as count
-FROM
-    ecoli_data
-WHERE
-    (((CONV(genotype, 10, 2) >> 1) & 1) != 1)
-        AND (((CONV(genotype, 10, 2) & 1) = 1)
-        OR (((CONV(genotype, 10, 2) >> 2) & 1) = 1));
+select count(*) as count
+from ecoli_data
+where genotype = 1
+    or conv(genotype, 10, 2) like '%01' 
+         or conv(genotype, 10, 2) like '%10_'
