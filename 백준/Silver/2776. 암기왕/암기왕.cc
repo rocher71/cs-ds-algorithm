@@ -1,11 +1,10 @@
 #include<iostream>
-#include<vector>
 #include<algorithm>
-#include<unordered_set>
+#include<vector>
 using namespace std;
 
-int tc, n, m;
-unordered_set<int> s;
+int n, m, tc;
+vector<int> numbers;
 
 int main() {
 	ios::sync_with_stdio(0);
@@ -18,20 +17,21 @@ int main() {
 		for (int i = 0; i < n; i++) {
 			int tmp;
 			cin >> tmp;
-			s.insert(tmp);
+			numbers.push_back(tmp);
 		}
-		cin >> m;
 
+		sort(numbers.begin(), numbers.end());
+
+		cin >> m;
 		for (int i = 0; i < m; i++) {
 			int q;
 			cin >> q;
-			if (s.find(q) == s.end()) {
-				cout << "0\n";
+			if (binary_search(numbers.begin(), numbers.end(), q)) {
+				cout << "1\n";
 				continue;
 			}
-			cout << "1\n";
+			cout << "0\n";
 		}
-		s.clear();
+		numbers.clear();
 	}
-	
 }
