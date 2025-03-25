@@ -1,23 +1,28 @@
-#include <string>
-#include <vector>
 #include<iostream>
-#include<sstream>
+#include<vector>
 #include<algorithm>
 using namespace std;
 
+vector<int> v;
+
 string solution(string s) {
-    string answer = "", stringBuffer;
-    istringstream ss(s);
-    vector<int> v;
+    string answer = "";
+    string tmp = "";
     
-    while(getline(ss, stringBuffer, ' ')){
-        v.push_back(stoi(stringBuffer));
+    for(int i = 0; i< s.size(); i++){
+        if(s[i] != ' '){
+            tmp += s[i];
+            continue;
+        }
+        
+        v.push_back(stoi(tmp));
+        tmp.clear();
     }
+     v.push_back(stoi(tmp));
     
     sort(v.begin(), v.end());
     
-    answer += to_string(v[0]) + " " + to_string(v[v.size()-1]);
-    
+    answer = to_string(v[0]) + " " + to_string(v[v.size()-1]);
     
     return answer;
 }
