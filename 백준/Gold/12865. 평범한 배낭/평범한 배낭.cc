@@ -1,10 +1,11 @@
+// 1차원 배열
 #include<iostream>
 #include<algorithm>
 using namespace std;
 
 int n, k;
 int weight[101], value[101];
-int arr[101][100001];
+int oneArr[100001];
 
 int main() {
 	ios::sync_with_stdio(0);
@@ -19,15 +20,11 @@ int main() {
 	}
 
 	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= k; j++) {
-			if (weight[i] > j) {
-				arr[i][j] = arr[i - 1][j];
-				continue;
-			}
-			// else, 넣을 수 있는 경우
-			arr[i][j] = max(arr[i - 1][j], arr[i - 1][j - weight[i]] + value[i]);
+		for (int w = k; w >= weight[i]; w--) {
+			oneArr[w] = max(oneArr[w], oneArr[w - weight[i]] + value[i]);
 		}
 	}
 
-	cout << arr[n][k] << "\n";
+
+	cout << oneArr[k] << "\n";
 }
