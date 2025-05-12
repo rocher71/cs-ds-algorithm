@@ -2,32 +2,38 @@
 #include<algorithm>
 #include<unordered_set>
 #include<vector>
-#define n 10
+#define n 9
 using namespace std;
 
+bool solved = false;
 int filledCnt = 0;
 int arr[n][n];
-bool existsX[n][n], existsY[n][n], existsInZone[n][n];
+bool existsX[n][n + 1], existsY[n][n + 1], existsInZone[n][n + 1];
 vector<pair<int, int>> blanks;
 
-int getZone(int y, int x) {
-    if (y <= 3 && x <= 3) return 1;
-    else if (y <= 3 && x <= 6) return 2;
-    else if (y <= 3 && x <= 9) return 3;
-    else if (y <= 6 && x <= 3) return 4;
-    else if (y <= 6 && x <= 6) return 5;
-    else if (y <= 6 && x <= 9) return 6;
-    else if (y <= 9 && x <= 3) return 7;
-    else if (y <= 9 && x <= 6) return 8;
-    else if (y <= 9 && x <= 9) return 9;
-}
 
-void search(int y, int x, int idx) {
+void search(int idx) {
+    if (solved) return;
+
+    if (idx == blanks.size()) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cout << arr[i][j] << " ";
+            }
+            cout << "\n";
+        }
+        solved = true;
+        return;
+    }
+
     vector<int> posNums;
-    int zone = getZone(y, x);
+    
+    int y = blanks[idx].first;
+    int x = blanks[idx].second;
+    int zone = (y / 3) * 3 + (x / 3);
 
     // 가로 세로 구역
-    for (int i = 1; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         if (!existsY[y][i] && !existsX[x][i] && !existsInZone[zone][i]) {
             posNums.push_back(i);
         }
@@ -40,18 +46,15 @@ void search(int y, int x, int idx) {
         existsX[x][num] = true;
         existsY[y][num] = true;
         existsInZone[zone][num] = true;
-        filledCnt++;
 
-        if (filledCnt == blanks.size()) return;
+        search(idx + 1);
+        //if (solved) return;
 
-        search(blanks[idx + 1].first, blanks[idx + 1].second, idx + 1);
-
-        if (filledCnt == blanks.size()) return;
         existsX[x][num] = false;
         existsY[y][num] = false;
         existsInZone[zone][num] = false;
         filledCnt--;
-        arr[y][x] = 0;
+       // arr[y][x] = 0;
     }
     return;
 }
@@ -61,8 +64,8 @@ int main() {
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    for (int i = 1; i < n; i++) {
-        for (int j = 1; j < n; j++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
             cin >> arr[i][j];
             if (arr[i][j] == 0) {
                 blanks.push_back({ i, j });
@@ -73,20 +76,21 @@ int main() {
             existsY[i][arr[i][j]] = true;
             existsX[j][arr[i][j]] = true;
 
-            int zone = getZone(i, j);
+            int zone = (i / 3) * 3 + (j / 3);
             existsInZone[zone][arr[i][j]] = true;
         }
     }
     
     
 
-    search(blanks[0].first, blanks[0].second, 0);
-
-
-    for (int i = 1; i < n; i++) {
-        for (int j = 1; j < n; j++) {
+    search(0);
+    /*
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
             cout << arr[i][j] << " ";
         }
         cout << "\n";
-    }
+    }*/
+
+    return 0;
 }
