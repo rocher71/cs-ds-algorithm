@@ -1,13 +1,11 @@
 
-
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Main {
     static int n, m, departure, arrival;
     static List<int[]>[] graph;
-    static int[] dist;
-
+    static int dist[];
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -16,11 +14,11 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         m = Integer.parseInt(st.nextToken());
 
-        dist = new int[n+1];
         graph = new ArrayList[n + 1];
-        for(int i = 1; i<= n ;i++) graph[i] = new ArrayList<>();
+        dist = new int[n+1];
+        for(int i = 1 ;i<= n; i++) graph[i] = new ArrayList<>();
 
-        for(int i = 0; i < m; i++){
+        for(int i = 0; i< m; i++){
             st = new StringTokenizer(br.readLine());
             int from = Integer.parseInt(st.nextToken());
             int to = Integer.parseInt(st.nextToken());
@@ -40,8 +38,8 @@ public class Main {
 
     static void dijk(){
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
-        pq.add(new int[]{0, departure});
         dist[departure] = 0;
+        pq.add(new int[]{0, departure});
 
         while(!pq.isEmpty()){
             int currCost = pq.peek()[0];
@@ -61,4 +59,5 @@ public class Main {
             }
         }
     }
+
 }
