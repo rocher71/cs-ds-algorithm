@@ -1,6 +1,6 @@
 select a.flavor
 from first_half a
 join icecream_info b on a.flavor = b.flavor
-where b.ingredient_type = 'fruit_based'
-group by a.flavor
-having sum(total_order) > 3000
+where a.total_order > 3000
+    and b.ingredient_type = 'fruit_based'
+order by a.total_order desc
