@@ -1,7 +1,7 @@
-select d.item_id, d.item_name, d.rarity
-from item_info d
-join (select b.item_id
+select c.item_id, item_name, rarity
+from  (select b.item_id
     from item_info a
-    join item_tree b on a.item_id = parent_item_id
-    where rarity = 'rare') c on d.item_id = c.item_id
-order by d.item_id desc
+    join item_tree b on a.item_id = b.parent_item_id
+    where rarity = 'RARE') c
+join item_info d on c.item_id = d.item_id
+order by c.item_id desc
