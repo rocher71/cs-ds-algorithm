@@ -1,16 +1,12 @@
-SELECT 
-    developers.id,
-    developers.email,
-    developers.first_name,
-    developers.last_name
-FROM
-    developers
-WHERE
-    (developers.skill_code & (SELECT 
-            SUM(skillcodes.code)
-        FROM
-            skillcodes
-        WHERE
-            skillcodes.name = 'C#'
-                OR skillcodes.name = 'python')) != 0
-ORDER BY id ASC;
+# select id, conv(skill_code, 10, 2), name, conv(code, 10, 2), skill_code & code
+# from developers
+# join skillcodes
+# where (name = 'C#' or name = 'Python') and (skill_code & code) != 0
+# order by id
+
+select distinct ID, EMAIL, FIRST_NAME, LAST_NAME
+from developers
+join skillcodes
+where (name = 'C#' and ((skill_code & code) != 0))
+    or (name = 'Python' and ((skill_code & code) != 0))
+order by id
