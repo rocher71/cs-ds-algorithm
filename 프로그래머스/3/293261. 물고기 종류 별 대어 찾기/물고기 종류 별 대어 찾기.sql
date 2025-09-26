@@ -1,7 +1,8 @@
-select a.id, b.fish_name, a.length
-from fish_info a
+select id, fish_name, length
+from (
+    select id, fish_type, rank() over(partition by fish_type order by length desc, length) as ranking, length
+    from fish_info
+) a
 join fish_name_info b on a.fish_type = b.fish_type
-where (a.fish_type, a.length) in (select fish_type, max(length)
-                                    from fish_info
-                                    group by fish_type)
-order by a.id
+where a.ranking = 1
+order by id
